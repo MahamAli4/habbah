@@ -200,7 +200,7 @@ export default function Home() {
                   {/* Hover Accent Orb */}
                   <div className="absolute -inset-1 bg-yellow/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
                 </div>
-                <h3 className="text-3xl font-black text-darkblue mb-2 group-hover:text-lightblue transition-colors">{person.name}</h3>
+                <h3 className="text-3xl font-black text-darkblue mb-2 group-hover:text-yellow transition-colors">{person.name}</h3>
                 <p className="text-lightblue font-black uppercase tracking-widest text-sm">{person.role}</p>
               </motion.div>
             ))}
@@ -324,7 +324,7 @@ export default function Home() {
           className="glass-dark rounded-[4rem] p-16 md:p-24 text-center text-white relative overflow-hidden group border-white/10"
         >
           {/* Animated background highlights */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-lightblue/10 rounded-full -mr-64 -mt-64 blur-[100px] group-hover:bg-yellow/5 transition-colors duration-700" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow/10 rounded-full -mr-64 -mt-64 blur-[100px] group-hover:bg-yellow/20 transition-colors duration-700" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-darkblue/50 rounded-full -ml-48 -mb-48 blur-[80px]" />
           
           <div className="relative z-10">

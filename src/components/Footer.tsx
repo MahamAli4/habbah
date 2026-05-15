@@ -29,7 +29,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-5">
               {[Globe, Send, Camera].map((Icon, i) => (
-                <Link key={i} href="#" className="p-3 bg-white/5 rounded-2xl hover:bg-lightblue hover:text-darkblue transition-all duration-300 hover:-translate-y-1">
+                <Link key={i} href="#" className="p-3 bg-white/5 rounded-2xl hover:bg-yellow hover:text-darkblue transition-all duration-300 hover:-translate-y-1">
                   <Icon className="w-5 h-5" />
                 </Link>
               ))}

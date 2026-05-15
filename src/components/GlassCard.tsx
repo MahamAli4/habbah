@@ -25,7 +25,7 @@ export default function GlassCard({ children, className = "", delay = 0 }: Glass
         scale: 1.02,
         transition: { duration: 0.3 } 
       }}
-      className={`glass rounded-[2.5rem] p-8 group relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,191,230,0.1)] ${className}`}
+      className={`glass rounded-[2.5rem] p-8 group relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,195,0,0.15)] ${className}`}
     >
       {/* Subtle Shine Effect */}
       <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

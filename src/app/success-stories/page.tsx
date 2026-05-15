@@ -136,7 +136,7 @@ export default function SuccessStories() {
                 <div className="absolute inset-0 bg-linear-to-t from-darkblue/80 via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4">
                   <h3 className="text-2xl font-bold text-white">{person.name}</h3>
-                  <div className="h-1 w-12 bg-lightblue mt-2 rounded-full" />
+                  <div className="h-1 w-12 bg-yellow mt-2 rounded-full" />
                 </div>
               </div>
               
@@ -168,7 +168,7 @@ export default function SuccessStories() {
           <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
             <Link 
               href="/contact" 
-              className="bg-darkblue text-white px-8 py-4 rounded-full font-bold hover:bg-lightblue transition-all"
+              className="bg-darkblue text-white px-8 py-4 rounded-full font-bold hover:bg-yellow hover:text-darkblue transition-all"
             >
               Share Your Story
             </Link>

@@ -109,7 +109,7 @@ export default function ApplicationProcess() {
       >
         <div className="relative">
           {/* Vertical Line for Desktop */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-lightblue via-darkblue to-lightblue transform -translate-x-1/2 opacity-20" />
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-yellow via-darkblue to-yellow transform -translate-x-1/2 opacity-20" />
           
           <div className="space-y-24">
             {steps.map((step, idx) => (
@@ -125,7 +125,7 @@ export default function ApplicationProcess() {
               >
                 {/* Content */}
                 <div className="flex-1 w-full">
-                  <GlassCard className="p-10 hover:border-lightblue transition-all">
+                  <GlassCard className="p-10 hover:border-yellow transition-all">
                     <div className="flex items-center gap-4 mb-6">
                       <span className="text-6xl font-extrabold text-lightblue/30 leading-none">
                         {step.step}
@@ -140,7 +140,7 @@ export default function ApplicationProcess() {
 
                 {/* Center Icon */}
                 <div className="relative z-10 w-20 h-20 bg-darkblue rounded-3xl flex items-center justify-center shadow-2xl border-4 border-white shrink-0 group-hover:scale-110 transition-transform">
-                  <step.icon className="w-10 h-10 text-lightblue" />
+                  <step.icon className="w-10 h-10 text-yellow" />
                 </div>
 
                 {/* Spacer for Desktop Alignment */}
@@ -158,7 +158,7 @@ export default function ApplicationProcess() {
           whileInView={{ opacity: 1, scale: 1 }}
           className="bg-lightblue rounded-[3rem] p-12 md:p-16 text-center shadow-2xl relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-linear-to-r from-lightblue to-cyan-500 opacity-50" />
+          <div className="absolute inset-0 bg-linear-to-r from-lightblue to-yellow opacity-40" />
           <div className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-extrabold text-darkblue mb-6">
               Ready to Start Your Journey?

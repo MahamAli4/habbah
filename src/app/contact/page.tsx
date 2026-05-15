@@ -101,7 +101,7 @@ export default function Contact() {
                 </div>
                 
                 <div className="flex gap-6 items-start group">
-                  <div className="p-4 bg-lightblue text-white rounded-2xl group-hover:-rotate-12 transition-transform">
+                  <div className="p-4 bg-yellow text-darkblue rounded-2xl group-hover:-rotate-12 transition-transform">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
@@ -168,7 +168,7 @@ export default function Contact() {
           className="relative group"
         >
           {/* Decorative Background Frame */}
-          <div className="absolute -inset-4 bg-linear-to-tr from-lightblue/20 to-yellow/10 rounded-[5rem] blur-2xl -z-10 group-hover:opacity-100 opacity-50 transition-opacity" />
+          <div className="absolute -inset-4 bg-linear-to-tr from-yellow/20 to-yellow/5 rounded-[5rem] blur-2xl -z-10 group-hover:opacity-100 opacity-50 transition-opacity" />
           
           <div className="glass rounded-[4rem] p-4 md:p-8 overflow-hidden shadow-2xl border border-white/50 bg-white/40 backdrop-blur-3xl min-h-[800px]">
              <iframe 

@@ -159,7 +159,7 @@ export default function About() {
             className="relative group"
           >
             {/* Professional Frame Accents */}
-            <div className="absolute -inset-4 border-2 border-dashed border-lightblue/30 rounded-[4.5rem] -rotate-3 group-hover:rotate-0 transition-transform duration-700" />
+            <div className="absolute -inset-4 border-2 border-dashed border-yellow/30 rounded-[4.5rem] -rotate-3 group-hover:rotate-0 transition-transform duration-700" />
             <div className="absolute -inset-4 border-2 border-dashed border-yellow/20 rounded-[4.5rem] rotate-3 group-hover:rotate-0 transition-transform duration-700" />
             
             <div className="relative h-[600px] rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white bg-white group">
@@ -242,7 +242,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-lightblue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow/10 rounded-full blur-[120px]" />
       </motion.section>
 
       {/* Programs Detailed Grid */}
@@ -294,7 +294,7 @@ export default function About() {
                 </div>
                 
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-black text-darkblue tracking-tight group-hover:text-lightblue transition-colors">{program.title}</h3>
+                  <h3 className="text-3xl font-black text-darkblue tracking-tight group-hover:text-yellow transition-colors">{program.title}</h3>
                   <p className="text-gray-600 text-lg leading-relaxed font-semibold">
                     {program.desc}
                   </p>

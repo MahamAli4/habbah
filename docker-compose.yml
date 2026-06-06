@@ -1,0 +1,39 @@
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: habbah_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: habbah_db
+    ports:
+      - "5499:5432" # Outer port 5499 par chalega taake local port crash na ho
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: habbah_app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres-db:5432/habbah_db
+      NODE_ENV: production
+      DB_SEED: "true"
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    restart: always
+    volumes:
+      - ./public:/app/public
+
+volumes:
+  postgres_data:

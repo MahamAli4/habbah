@@ -1,0 +1,175 @@
+// Habbah Educational Trust — Prisma Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── ADMIN USERS ───────────────────────────────────────────────
+model AdminUser {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String
+  role         AdminRole  @default(ADMIN)
+  name         String     @default("Admin")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  sessions     Session[]
+  auditLogs    AuditLog[]
+}
+
+enum AdminRole {
+  ADMIN
+  SUPER_ADMIN
+}
+
+// ─── SESSIONS ──────────────────────────────────────────────────
+model Session {
+  id        Int       @id @default(autoincrement())
+  token     String    @unique
+  userId    Int
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── CONTACT MESSAGES ──────────────────────────────────────────
+model Message {
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String
+  phone         String?
+  message       String    @db.Text
+  preferredDate String?
+  isDeleted     Boolean   @default(false)
+  deletedBy     String?
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+}
+
+// ─── JOBS ──────────────────────────────────────────────────────
+model Job {
+  id               Int              @id @default(autoincrement())
+  title            String
+  description      String           @db.Text
+  location         String           @default("Karachi")
+  jobType          JobType          @default(FULL_TIME)
+  category         String?
+  department       String?
+  employmentLevel  String?
+  requirements     String?          @db.Text
+  responsibilities String?          @db.Text
+  qualifications   String?          @db.Text
+  isDeleted        Boolean          @default(false)
+  isActive         Boolean          @default(true)
+  deadlineAt       DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  applications     JobApplication[]
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+  CONTRACT
+}
+
+// ─── JOB APPLICATIONS ──────────────────────────────────────────
+model JobApplication {
+  id              Int               @id @default(autoincrement())
+  jobId           Int
+  applicantName   String
+  applicantEmail  String
+  applicantPhone  String?
+  coverLetter     String?           @db.Text
+  experience      String?
+  education       String?
+  status          ApplicationStatus @default(PENDING)
+  interviewDate   String?
+  interviewTime   String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  job             Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+}
+
+enum ApplicationStatus {
+  PENDING
+  INTERVIEW
+  HIRED
+  REJECTED
+}
+
+// ─── CANDIDATES (Manual) ───────────────────────────────────────
+model Candidate {
+  id            Int               @id @default(autoincrement())
+  name          String
+  email         String
+  phone         String?
+  position      String
+  experience    String?
+  education     String?
+  status        ApplicationStatus @default(PENDING)
+  interviewDate String?
+  interviewTime String?
+  isDeleted     Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+// ─── VOLUNTEERS ────────────────────────────────────────────────
+model Volunteer {
+  id           Int             @id @default(autoincrement())
+  name         String
+  email        String
+  phone        String?
+  interest     String?
+  message      String?         @db.Text
+  status       VolunteerStatus @default(PENDING)
+  meetingDate  String?
+  meetingTime  String?
+  isDeleted    Boolean         @default(false)
+  deletedAt    DateTime?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+enum VolunteerStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  INTERVIEW
+}
+
+// ─── AUDIT LOGS ────────────────────────────────────────────────
+model AuditLog {
+  id          Int       @id @default(autoincrement())
+  action      String
+  performedBy String
+  targetType  String?
+  targetId    Int?
+  details     String?   @db.Text
+  createdAt   DateTime  @default(now())
+
+  adminUser   AdminUser? @relation(fields: [performedBy], references: [email])
+}
+
+// ─── CMS CONTENT ───────────────────────────────────────────────
+model CmsContent {
+  id        Int      @id @default(autoincrement())
+  pageId    String
+  tab       String
+  content   Json
+  updatedBy String?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@unique([pageId, tab])
+}

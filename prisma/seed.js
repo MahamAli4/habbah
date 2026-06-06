@@ -74,7 +74,7 @@ async function main() {
   console.log("Seed complete!");
   console.log(`\nSuper Admin: ${superAdminEmail}`);
   console.log(`Password: Habbah@SuperAdmin2026!\n`);
-  console.log(`Admin: ${adminEmail}`);j
+  console.log(`Admin: ${adminEmail}`);
   console.log(`Password: Habbah@Admin2026!\n`);
 }
 

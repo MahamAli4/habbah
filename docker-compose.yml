@@ -34,6 +34,8 @@ services:
     restart: always
     volumes:
       - ./public:/app/public
+      - ./prisma.config.ts:/app/prisma.config.ts:ro
+      - ./prisma:/app/prisma:ro
 
 volumes:
   postgres_data:

@@ -5,6 +5,9 @@ import path from "path";
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 export default defineConfig({
+  migrations: {
+    seed: "node ./prisma/seed.js",
+  },
   datasource: {
     url: process.env.DATABASE_URL,
   },

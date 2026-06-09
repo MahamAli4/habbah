@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { GraduationCap, Mail, Phone, MapPin, Globe, Send, Camera, Briefcase } from "lucide-react";
+import { GraduationCap, Mail, Phone, MapPin, Globe, Send, Camera, Briefcase, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -65,28 +65,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Initiatives + Careers */}
+          {/* Careers + Volunteer */}
           <div>
-            <h4 className="text-lg font-black uppercase tracking-[0.2em] text-lightblue mb-8">Initiatives</h4>
+            <h4 className="text-lg font-black uppercase tracking-[0.2em] text-lightblue mb-8">Opportunities</h4>
             <ul className="space-y-5">
-              {[
-                { label: "Interest-free Loans", href: "#" },
-                { label: "Scholarships", href: "#" },
-                { label: "Mentorship", href: "#" },
-                { label: "Career Guidance", href: "#" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-all flex items-center gap-3 group"
-                  >
-                    <div className="w-1.5 h-1.5 bg-lightblue rounded-full opacity-0 group-hover:opacity-100 transition-all" />
-                    <span className="group-hover:translate-x-1 transition-transform font-bold">
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
 
               {/* ✅ Careers Link */}
               <li>
@@ -98,6 +80,19 @@ export default function Footer() {
                     <Briefcase className="w-4 h-4 text-lightblue group-hover:text-white transition-colors" />
                     <span className="font-black text-lightblue group-hover:text-white transition-colors text-sm uppercase tracking-widest">
                       Careers
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/volunteer"
+                  className="flex items-center gap-3 group"
+                >
+                  <div className="flex items-center gap-2 px-4 py-2 bg-lightblue/10 hover:bg-lightblue border border-lightblue/30 hover:border-lightblue rounded-xl transition-all duration-300">
+                    <Heart className="w-4 h-4 text-lightblue group-hover:text-white transition-colors" />
+                    <span className="font-black text-lightblue group-hover:text-white transition-colors text-sm uppercase tracking-widest">
+                      Volunteer
                     </span>
                   </div>
                 </Link>

@@ -122,10 +122,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
         transition-transform duration-500 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        <div className="p-10">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-black text-[#012060] tracking-tight">Admin</h1>
-            <p className="text-sm md:text-base font-black text-idara-orange uppercase tracking-[.3em] opacity-80">Workspace v2.0</p>
+        <div className="px-10 pt-10 pb-6">
+          <div className="flex items-center gap-3">
+            <img src="/unnamed.png" alt="Habbah" className="w-10 h-10 rounded-xl object-cover shadow-lg shrink-0" />
+            <div className="flex flex-col">
+              <h1 className="text-xl font-black text-[#012060] tracking-tight leading-none">HABBAH</h1>
+              <p className="text-[9px] font-black text-idara-orange uppercase tracking-[.3em] leading-tight mt-0.5">Admin Panel</p>
+            </div>
           </div>
         </div>
 

@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
   MapPin,
-  Clock,
-  ChevronRight,
   Send,
   Heart,
   Users,
@@ -50,21 +48,10 @@ export default function CareersPage() {
   const [applyStatus, setApplyStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [applyError, setApplyError] = useState("");
 
-  // Volunteer form
-  const [volForm, setVolForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    interest: "",
-    message: "",
-  });
-  const [volStatus, setVolStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [volError, setVolError] = useState("");
-
   useEffect(() => {
     fetch("/api/jobs")
       .then((r) => r.json())
-      .then((d) => setJobs((d.jobs || []).filter((j: any) => j.id !== 4)))
+      .then((d) => setJobs(d.jobs || []))
       .catch(console.error)
       .finally(() => setLoadingJobs(false));
   }, []);
@@ -98,31 +85,6 @@ export default function CareersPage() {
     } catch {
       setApplyError("Network error. Please try again.");
       setApplyStatus("error");
-    }
-  };
-
-  const handleVolSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setVolStatus("loading");
-    setVolError("");
-
-    try {
-      const res = await fetch("/api/volunteers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(volForm),
-      });
-      if (res.ok) {
-        setVolStatus("success");
-        setVolForm({ name: "", email: "", phone: "", interest: "", message: "" });
-      } else {
-        const d = await res.json();
-        setVolError(d.error || "Failed to submit.");
-        setVolStatus("error");
-      }
-    } catch {
-      setVolError("Network error. Please try again.");
-      setVolStatus("error");
     }
   };
 
@@ -274,139 +236,6 @@ export default function CareersPage() {
         )}
       </section>
 
-      {/* Volunteer Section */}
-      <section className="py-24 bg-bglightblue">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Left */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <p className="text-xs font-black text-lightblue uppercase tracking-[0.3em] mb-4">Make a Difference</p>
-                <h2 className="text-5xl md:text-6xl font-black text-darkblue tracking-tighter leading-[0.9] mb-6">
-                  Volunteer With <span className="text-lightblue">Us</span>
-                </h2>
-                <p className="text-gray-600 font-medium leading-relaxed text-lg mb-8">
-                  Can&apos;t find a suitable role? Join our volunteer program and contribute your skills and time to help us empower the next generation.
-                </p>
-
-                <div className="space-y-5">
-                  {[
-                    { icon: Users, title: "Community Impact", desc: "Directly help students and families in need" },
-                    { icon: GraduationCap, title: "Skill Sharing", desc: "Teach, mentor, and guide aspiring professionals" },
-                    { icon: Heart, title: "Fulfilling Work", desc: "Experience meaningful work that transforms lives" },
-                  ].map(({ icon: Icon, title, desc }) => (
-                    <div key={title} className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-darkblue text-yellow rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-darkblue/20">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="font-black text-darkblue">{title}</p>
-                        <p className="text-gray-500 font-medium text-sm">{desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Right — Volunteer Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-[3rem] p-8 md:p-10 shadow-[0_30px_80px_rgba(3,4,94,0.08)] border border-gray-50"
-              >
-                {volStatus === "success" ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
-                  >
-                    <div className="w-20 h-20 bg-darkblue rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-darkblue/30">
-                      <CheckCircle className="w-10 h-10 text-yellow" />
-                    </div>
-                    <h3 className="text-2xl font-black text-darkblue mb-3">Application Received!</h3>
-                    <p className="text-gray-500 font-bold mb-6">
-                      Thank you for your interest in volunteering. We&apos;ll be in touch soon!
-                    </p>
-                    <button
-                      onClick={() => setVolStatus("idle")}
-                      className="px-6 py-3 bg-darkblue text-white font-black rounded-2xl hover:bg-lightblue transition-all text-sm uppercase tracking-widest"
-                    >
-                      Submit Another
-                    </button>
-                  </motion.div>
-                ) : (
-                  <>
-                    <h3 className="text-2xl font-black text-darkblue mb-2">Volunteer Application</h3>
-                    <p className="text-gray-400 font-bold text-sm mb-8">Join our community of changemakers</p>
-
-                    <form onSubmit={handleVolSubmit} className="space-y-5">
-                      {[
-                        { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
-                        { label: "Email Address", name: "email", type: "email", placeholder: "your@email.com", required: true },
-                        { label: "Phone Number", name: "phone", type: "tel", placeholder: "+92 300 0000000" },
-                        { label: "Area of Interest", name: "interest", type: "text", placeholder: "e.g. Teaching, Mentoring, Administration" },
-                      ].map((field) => (
-                        <div key={field.name} className="flex flex-col gap-1.5">
-                          <label className="text-xs font-black text-darkblue uppercase tracking-widest">
-                            {field.label} {field.required && <span className="text-yellow">*</span>}
-                          </label>
-                          <input
-                            type={field.type}
-                            name={field.name}
-                            value={(volForm as any)[field.name]}
-                            onChange={(e) => setVolForm((p) => ({ ...p, [e.target.name]: e.target.value }))}
-                            placeholder={field.placeholder}
-                            required={field.required}
-                            className="bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3.5 text-darkblue placeholder:text-gray-400 focus:border-lightblue focus:ring-4 focus:ring-lightblue/10 outline-none transition-all font-bold text-sm"
-                          />
-                        </div>
-                      ))}
-
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-black text-darkblue uppercase tracking-widest">
-                          Why do you want to volunteer?
-                        </label>
-                        <textarea
-                          name="message"
-                          value={volForm.message}
-                          onChange={(e) => setVolForm((p) => ({ ...p, message: e.target.value }))}
-                          placeholder="Tell us about your motivation..."
-                          rows={4}
-                          className="bg-gray-50 border-2 border-gray-100 rounded-2xl px-5 py-3.5 text-darkblue placeholder:text-gray-400 focus:border-lightblue focus:ring-4 focus:ring-lightblue/10 outline-none transition-all font-bold text-sm resize-none"
-                        />
-                      </div>
-
-                      {volStatus === "error" && (
-                        <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-100 rounded-2xl">
-                          <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
-                          <p className="text-red-600 font-bold text-sm">{volError}</p>
-                        </div>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={volStatus === "loading"}
-                        className="w-full py-4 bg-darkblue text-white font-black rounded-2xl hover:bg-lightblue transition-all shadow-lg shadow-darkblue/20 uppercase tracking-widest text-sm flex items-center justify-center gap-2 disabled:opacity-60"
-                      >
-                        {volStatus === "loading" ? (
-                          <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
-                        ) : (
-                          <><Send className="w-4 h-4" /> Submit Application</>
-                        )}
-                      </button>
-                    </form>
-                  </>
-                )}
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Apply Modal */}
       <AnimatePresence>

@@ -9,8 +9,8 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   console.log("Seeding database...");
 
-  const superAdminEmail = "admin@habbah.com";
-  const superAdminPass = await bcrypt.hash("habba@1234", 12);
+  const superAdminEmail = "superadmin@habbah.com";
+  const superAdminPass = await bcrypt.hash("superhabba@1234", 12);
   await prisma.adminUser.upsert({
     where: { email: superAdminEmail },
     update: {},
